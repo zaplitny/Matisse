@@ -51,9 +51,10 @@ public class Album implements Parcelable {
      * This method is not responsible for managing cursor resource, such as close, iterate, and so on.
      */
     public static Album valueOf(Cursor cursor) {
+        String clumn = cursor.getString(cursor.getColumnIndex(AlbumLoader.COLUMN_URI));
         return new Album(
                 cursor.getString(cursor.getColumnIndex("bucket_id")),
-                Uri.parse(cursor.getString(cursor.getColumnIndex(AlbumLoader.COLUMN_URI))),
+                Uri.parse(clumn != null ? clumn : ""),
                 cursor.getString(cursor.getColumnIndex("bucket_display_name")),
                 cursor.getLong(cursor.getColumnIndex(AlbumLoader.COLUMN_COUNT)));
     }
